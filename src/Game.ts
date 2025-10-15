@@ -1,10 +1,15 @@
 import * as PIXI from 'pixi.js';
-import { SlotMachine } from './slots/SlotMachine';
-import { AssetLoader } from './utils/AssetLoader';
-import { UI } from './ui/UI';
+import {SlotMachine} from './slots/SlotMachine';
+import {AssetLoader} from './utils/AssetLoader';
+import {UI} from './ui/UI';
 
+/**
+ * Main entry point for the slot machine game application.
+ * Initializes PIXI application, loads assets, and sets up game components including the SlotMachine and UI.
+ * Handles game lifecycle events like resizing and update loop to drive game progression.
+ */
 export class Game {
-    private app: PIXI.Application;
+    private readonly app: PIXI.Application;
     private slotMachine!: SlotMachine;
     private ui!: UI;
     private assetLoader: AssetLoader;

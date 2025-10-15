@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import { sound } from './sound';
+import {Sound} from './Sound';
 
 // Asset paths
 const IMAGES_PATH = 'assets/images/';
@@ -33,21 +33,28 @@ const SOUNDS = [
 const textureCache: Record<string, PIXI.Texture> = {};
 const spineCache: Record<string, any> = {};
 
+/**
+ * Utility class for loading and caching game assets such as textures, spine animations, and sounds.
+ * Handles asynchronous loading of image, spine, and sound bundles required by the slot machine game.
+ * Provides cached accessors for these assets to optimize resource usage.
+ */
 export class AssetLoader {
     constructor() {
-        PIXI.Assets.init({ basePath: '' });
+        // No-op
     }
 
     public async loadAssets(): Promise<void> {
         try {
+            await PIXI.Assets.init({basePath: ''});
+
             PIXI.Assets.addBundle('images', IMAGES.map(image => ({
-                name: image,
-                srcs: IMAGES_PATH + image
+                alias: image,
+                src: IMAGES_PATH + image
             })));
 
             PIXI.Assets.addBundle('spines', SPINES.map(spine => ({
-                name: spine,
-                srcs: SPINES_PATH + spine
+                alias: spine,
+                src: SPINES_PATH + spine
             })));
 
             const imageAssets = await PIXI.Assets.loadBundle('images');
@@ -79,7 +86,7 @@ export class AssetLoader {
     private async loadSounds(): Promise<void> {
         try {
             SOUNDS.forEach(soundFile => {
-                sound.add(soundFile.split('.')[0], SOUNDS_PATH + soundFile);
+                Sound.add(soundFile.split('.')[0], SOUNDS_PATH + soundFile);
             });
         } catch (error) {
             console.error('Error loading sounds:', error);

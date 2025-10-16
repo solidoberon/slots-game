@@ -14,7 +14,7 @@ function getFiles(dir: string, allowedExtensions: string[]): string[] {
 const assets = {
     images: getFiles(GameConstants.IMAGES_MANIFEST_PATH, ['.png']),
     spines: getFiles(GameConstants.SPINES_MANIFEST_PATH, ['.json']),
-    sounds: getFiles(GameConstants.SOUNDS_MANIFEST_PATH, ['.webm']),
+    sounds: getFiles(GameConstants.SOUNDS_MANIFEST_PATH, ['.webm', '.mp3']),
 };
 
 // Create dist/assets folder if missing

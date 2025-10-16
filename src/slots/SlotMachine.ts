@@ -196,7 +196,7 @@ export class SlotMachine {
             setTimeout(() => {
                 this.reels[i].stopSpin();
                 // Using 'Spin button' sound for reel stop as placeholder - can be replaced
-                Sound.play('Spin button');
+                Sound.play('click');
 
                 // If this is the last reel, check for wins and enable spin button
                 if (i === this.reels.length - 1) {

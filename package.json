@@ -4,6 +4,7 @@
   "description": "A simple slots game using PixiJS",
   "main": "dist/index.js",
   "scripts": {
+    "prebuild": "npx ts-node generate-asset-manifest.ts",
     "build": "webpack --mode production",
     "start": "webpack serve --mode development",
     "lint": "eslint src --ext .ts",

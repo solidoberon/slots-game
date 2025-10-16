@@ -78,6 +78,8 @@ Assets (copied to `dist/assets` during build):
 - Spines: `src/assets/spines/`
 - Sounds: `src/assets/sounds/`
 
+**WARNING:**  
+**You must run the build process before running the project to ensure all assets are properly generated and available. The asset manifest and related files are generated during the build, and failing to build will cause asset loading errors.**
 
 ## Getting started
 Prerequisites

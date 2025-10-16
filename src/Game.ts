@@ -48,7 +48,7 @@ export class Game {
             this.ui = new UI(this.app, this.slotMachine);
             this.app.stage.addChild(this.ui.container);
 
-            this.app.ticker.add(this.update.bind(this));
+            this.app.ticker.add(this.update.bind(this)); // Binding update() to PIXI
 
             console.log('Game initialized successfully');
         } catch (error) {
@@ -58,7 +58,7 @@ export class Game {
 
     private update(delta: number): void {
         if (this.slotMachine) {
-            this.slotMachine.update(delta);
+            this.slotMachine.update(delta); // Using ticker's time elapsed since last frame (delta)
         }
     }
 

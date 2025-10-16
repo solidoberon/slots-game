@@ -1,34 +1,12 @@
 import * as PIXI from 'pixi.js';
 import {Sound} from './Sound';
+import {GameConstants} from "../consts/GameConstants";
 
-// Asset paths
-const IMAGES_PATH = 'assets/images/';
-const SPINES_PATH = 'assets/spines/';
-const SOUNDS_PATH = 'assets/sounds/';
-
-// Asset lists
-const IMAGES = [
-    'symbol1.png',
-    'symbol2.png',
-    'symbol3.png',
-    'symbol4.png',
-    'symbol5.png',
-    'background.png',
-    'button_spin.png',
-    'button_spin_disabled.png',
-];
-
-const SPINES = [
-    'big-boom-h.json',
-    'base-feature-frame.json'
-];
-
-
-const SOUNDS = [
-    'Reel spin.webm',
-    'win.webm',
-    'Spin button.webm',
-];
+interface AssetManifest {
+    images: string[];
+    spines: string[];
+    sounds: string[];
+}
 
 const textureCache: Record<string, PIXI.Texture> = {};
 const spineCache: Record<string, any> = {};
@@ -47,15 +25,24 @@ export class AssetLoader {
         try {
             await PIXI.Assets.init({basePath: ''});
 
-            PIXI.Assets.addBundle('images', IMAGES.map(image => ({
-                alias: image,
-                src: IMAGES_PATH + image
-            })));
+            const response = await fetch('/assets/asset-manifest.json');
+            const manifest: AssetManifest = await response.json();
 
-            PIXI.Assets.addBundle('spines', SPINES.map(spine => ({
-                alias: spine,
-                src: SPINES_PATH + spine
-            })));
+            PIXI.Assets.addBundle(
+                'images',
+                manifest.images.map(img => ({
+                    alias: img,
+                    src: `${GameConstants.IMAGES_PATH}/${img}`,
+                }))
+            );
+
+            PIXI.Assets.addBundle(
+                'spines',
+                manifest.spines.map(sp => ({
+                    alias: sp,
+                    src: `${GameConstants.SPINES_PATH}/${sp}`,
+                }))
+            );
 
             const imageAssets = await PIXI.Assets.loadBundle('images');
             console.log('Images loaded successfully');
@@ -75,7 +62,7 @@ export class AssetLoader {
                 console.error('Error loading spine animations:', error);
             }
 
-            await this.loadSounds();
+            await this.loadSounds(manifest);
             console.log('Assets loaded successfully');
         } catch (error) {
             console.error('Error loading assets:', error);
@@ -83,10 +70,10 @@ export class AssetLoader {
         }
     }
 
-    private async loadSounds(): Promise<void> {
+    private async loadSounds(manifest: AssetManifest): Promise<void> {
         try {
-            SOUNDS.forEach(soundFile => {
-                Sound.add(soundFile.split('.')[0], SOUNDS_PATH + soundFile);
+            manifest.sounds.forEach(soundFile => {
+                Sound.add(soundFile.split('.')[0], `${GameConstants.SOUNDS_PATH}/${soundFile}`);
             });
         } catch (error) {
             console.error('Error loading sounds:', error);

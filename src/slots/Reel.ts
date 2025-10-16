@@ -73,7 +73,7 @@ export class Reel {
         if (!this.isSpinning && this.speed === 0) return;
 
         // Move symbols horizontally to the left
-        const dx = (this.isSpinning ? this.speed : this.speed) * (delta || 1);
+        const dx = this.speed * (delta || 1);
         for (const sprite of this.symbols) {
             sprite.x -= dx;
         }

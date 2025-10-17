@@ -1,16 +1,37 @@
 {
   "name": "slots-game",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
+  "version": "1.0.0",
+  "description": "A simple slots game using PixiJS",
+  "main": "dist/index.js",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview"
+    "prebuild": "npx ts-node generate-asset-manifest.ts",
+    "build": "webpack --mode production",
+    "start": "webpack serve --mode development",
+    "lint": "eslint src --ext .ts",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "howler": "^2.2.4",
+    "pixi-spine": "^4.0.4",
+    "pixi.js": "^7.3.2"
   },
   "devDependencies": {
-    "typescript": "^5.2.2",
-    "prettier": "^3.3.1",
-    "vite": "^5.2.0"
-  }
+    "@types/howler": "^2.2.12",
+    "@types/jest": "^29.5.12",
+    "@typescript-eslint/eslint-plugin": "^6.19.0",
+    "@typescript-eslint/parser": "^6.19.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "eslint": "^8.56.0",
+    "html-webpack-plugin": "^5.5.3",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.5",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.2.2"
+  },
+  "private": true
 }

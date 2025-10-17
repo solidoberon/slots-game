@@ -17,6 +17,7 @@ const spineCache: Record<string, any> = {};
  * Provides cached accessors for these assets to optimize resource usage.
  */
 export class AssetLoader {
+    static symbolTextures: string[] = [];
     constructor() {
         // No-op
     }
@@ -27,6 +28,7 @@ export class AssetLoader {
 
             const response = await fetch('/assets/asset-manifest.json');
             const manifest: AssetManifest = await response.json();
+            AssetLoader.symbolTextures = manifest.images.filter(img => img.startsWith("symbol"))
 
             PIXI.Assets.addBundle(
                 'images',

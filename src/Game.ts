@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import {SlotMachine} from './slots/SlotMachine';
 import {AssetLoader} from './utils/AssetLoader';
 import {UI} from './ui/UI';
+import {GameConstants} from './consts/GameConstants';
 
 /**
  * Main entry point for the slot machine game application.
@@ -16,8 +17,8 @@ export class Game {
 
     constructor() {
         this.app = new PIXI.Application({
-            width: 1280,
-            height: 800,
+            width: GameConstants.BASE_WIDTH,
+            height: GameConstants.BASE_HEIGHT,
             backgroundColor: 0x1099bb,
             resolution: window.devicePixelRatio || 1,
             autoDensity: true,
@@ -34,8 +35,6 @@ export class Game {
         this.resize = this.resize.bind(this);
 
         window.addEventListener('resize', this.resize);
-
-        this.resize();
     }
 
     public async init(): Promise<void> {
@@ -49,6 +48,10 @@ export class Game {
             this.app.stage.addChild(this.ui.container);
 
             this.app.ticker.add(this.update.bind(this)); // Binding update() to PIXI
+
+            // Call resize AFTER all game elements are initialized
+            // This ensures proper scaling on page load/refresh
+            this.resize();
 
             console.log('Game initialized successfully');
         } catch (error) {
@@ -72,13 +75,13 @@ export class Game {
         const h = gameContainer.clientHeight;
 
         // Calculate scale to fit the container while maintaining aspect ratio
-        const scale = Math.min(w / 1280, h / 800);
+        const scale = Math.min(w / GameConstants.BASE_WIDTH, h / GameConstants.BASE_HEIGHT);
 
         this.app.stage.scale.set(scale);
 
-        // Center the stage
+        // Resize the renderer to fill the container
         this.app.renderer.resize(w, h);
         this.app.stage.position.set(w / 2, h / 2);
-        this.app.stage.pivot.set(1280 / 2, 800 / 2);
+        this.app.stage.pivot.set(GameConstants.BASE_WIDTH / 2, GameConstants.BASE_HEIGHT / 2);
     }
 }

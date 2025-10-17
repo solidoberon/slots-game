@@ -1,4 +1,4 @@
-import {GameCoreLogic, GridCoord} from '../src/core/GameCoreLogic';
+import {GameCoreLogic, GridCoord} from '../../src/core/GameCoreLogic';
 
 /**
  * Helper to pretty print a path for debugging failures.

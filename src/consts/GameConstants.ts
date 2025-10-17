@@ -2,6 +2,9 @@ export class GameConstants {
     // ==============================================
     // Game related parameters
     // ==============================================
+    public static readonly BASE_WIDTH: number = 1280;
+    public static readonly BASE_HEIGHT: number = 800;
+
     public static readonly REEL_COUNT: number = 4;
     public static readonly SYMBOLS_PER_REEL: number = 6;
     public static readonly SYMBOL_SIZE: number = 150;

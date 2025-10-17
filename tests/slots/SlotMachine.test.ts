@@ -6,7 +6,7 @@
 import {jest} from '@jest/globals';
 
 import * as PIXI from 'pixi.js';
-import {SlotMachine} from '../src/slots/SlotMachine';
+import {SlotMachine} from '../../src/slots/SlotMachine';
 
 // --- Mocks ---
 
@@ -129,7 +129,7 @@ jest.mock('pixi-spine', () => ({
 }));
 
 // Mock AssetLoader static methods
-jest.mock('../src/utils/AssetLoader', () => ({
+jest.mock('../../src/utils/AssetLoader', () => ({
     AssetLoader: class {
         static getTexture(_name: string) {
             return {};
@@ -145,7 +145,7 @@ jest.mock('../src/utils/AssetLoader', () => ({
 const loopMock = jest.fn();
 const playMock = jest.fn();
 const stopMock = jest.fn();
-jest.mock('../src/utils/Sound', () => ({
+jest.mock('../../src/utils/Sound', () => ({
     Sound: {
         loop: (alias: string, val: boolean) => loopMock(alias, val),
         play: (alias: string) => playMock(alias),
@@ -154,7 +154,7 @@ jest.mock('../src/utils/Sound', () => ({
 }));
 
 // Mock Reel with minimal behavior so SlotMachine can apply and read grid
-jest.mock('../src/slots/Reel', () => {
+jest.mock('../../src/slots/Reel', () => {
     return {
         Reel: class {
             public container: any;

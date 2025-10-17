@@ -2,6 +2,7 @@ import * as PIXI from 'pixi.js';
 import {SlotMachine} from '../slots/SlotMachine';
 import {AssetLoader} from '../utils/AssetLoader';
 import {Sound} from '../utils/Sound';
+import {GameConstants} from '../consts/GameConstants';
 
 export class UI {
     public container: PIXI.Container;
@@ -33,8 +34,8 @@ export class UI {
             // Create a simple shadow sprite behind the spin button
             this.spinButtonShadow = new PIXI.Sprite(tex);
             this.spinButtonShadow.anchor.set(0.5);
-            this.spinButtonShadow.x = this.app.screen.width / 2;
-            this.spinButtonShadow.y = this.app.screen.height - 50 + 10;
+            this.spinButtonShadow.x = GameConstants.BASE_WIDTH / 2;
+            this.spinButtonShadow.y = GameConstants.BASE_HEIGHT - 60;
             this.spinButtonShadow.width = 150;
             this.spinButtonShadow.height = 80;
             this.spinButtonShadow.tint = 0x000000;
@@ -44,8 +45,8 @@ export class UI {
             // Actual spin button on top
             this.spinButton = new PIXI.Sprite(tex);
             this.spinButton.anchor.set(0.5);
-            this.spinButton.x = this.app.screen.width / 2;
-            this.spinButton.y = this.app.screen.height - 50;
+            this.spinButton.x = GameConstants.BASE_WIDTH / 2;
+            this.spinButton.y = GameConstants.BASE_HEIGHT - 50;
             this.spinButton.width = 150;
             this.spinButton.height = 80;
 
@@ -86,8 +87,8 @@ export class UI {
     }
 
     private createActionButtons(): void {
-        const x = this.app.screen.width - 180;
-        const yBase = this.app.screen.height / 2 - 100;
+        const x = GameConstants.BASE_WIDTH - 180;
+        const yBase = GameConstants.BASE_HEIGHT / 2 - 100;
         const gap = 60;
 
         const btn1 = this.createTextButton('Win: Straight (LR/TB)', x, yBase, () => {

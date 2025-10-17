@@ -1,7 +1,7 @@
 /**
  * Unit tests for src/utils/Sound.ts using a mocked Howl from 'howler'.
  */
-import {Sound} from '../src/utils/Sound';
+import {Sound} from '../../src/utils/Sound';
 
 const playMock = jest.fn();
 const stopMock = jest.fn();

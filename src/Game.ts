@@ -3,6 +3,7 @@ import {SlotMachine} from './slots/SlotMachine';
 import {AssetLoader} from './utils/AssetLoader';
 import {UI} from './ui/UI';
 import {GameConstants} from './consts/GameConstants';
+import { Reel } from './slots/Reel';
 
 /**
  * Main entry point for the slot machine game application.
@@ -40,6 +41,8 @@ export class Game {
     public async init(): Promise<void> {
         try {
             await this.assetLoader.loadAssets();
+
+            Reel.SYMBOL_TEXTURES = AssetLoader.symbolTextures;
 
             this.slotMachine = new SlotMachine(this.app);
             this.app.stage.addChild(this.slotMachine.container);

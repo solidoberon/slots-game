@@ -2,14 +2,6 @@ import * as PIXI from 'pixi.js';
 import {AssetLoader} from '../utils/AssetLoader';
 import {GameConstants} from "../consts/GameConstants";
 
-const SYMBOL_TEXTURES = [
-    'symbol1.png',
-    'symbol2.png',
-    'symbol3.png',
-    'symbol4.png',
-    'symbol5.png',
-];
-
 const {
     SPIN_SPEED,
     SLOWDOWN_RATE
@@ -31,6 +23,7 @@ export class Reel {
     // and preserve the initial sprite order on snap.
     private manualLockTextures: boolean = false;
     private initialOrderSprites: PIXI.Sprite[] | null = null;
+    public static SYMBOL_TEXTURES: readonly string[] = [];
 
     constructor(symbolCount: number, symbolSize: number) {
         this.container = new PIXI.Container();
@@ -59,7 +52,7 @@ export class Reel {
 
     private createRandomSymbol(): PIXI.Sprite {
         // Get a random symbol texture
-        const textureName = SYMBOL_TEXTURES[Math.floor(Math.random() * SYMBOL_TEXTURES.length)];
+        const textureName = Reel.SYMBOL_TEXTURES[Math.floor(Math.random() * Reel.SYMBOL_TEXTURES.length)];
         const texture = AssetLoader.getTexture(textureName);
 
         // Create a sprite with the texture
@@ -85,7 +78,7 @@ export class Reel {
             if (sprite.x + this.symbolSize <= -1) {
                 // Move this sprite to the immediate position after the current rightmost
                 if (!this.manualLockTextures) {
-                    const newName = SYMBOL_TEXTURES[Math.floor(Math.random() * SYMBOL_TEXTURES.length)];
+                    const newName = Reel.SYMBOL_TEXTURES[Math.floor(Math.random() * Reel.SYMBOL_TEXTURES.length)];
                     sprite.texture = AssetLoader.getTexture(newName);
                     sprite.name = newName;
                 }

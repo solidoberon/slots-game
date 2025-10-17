@@ -12,9 +12,9 @@
     "test:watch": "jest --watch"
   },
   "dependencies": {
+    "howler": "^2.2.4",
     "pixi-spine": "^4.0.4",
-    "pixi.js": "^7.3.2",
-    "howler": "^2.2.4"
+    "pixi.js": "^7.3.2"
   },
   "devDependencies": {
     "@types/howler": "^2.2.12",
@@ -31,7 +31,7 @@
     "typescript": "^5.5.3",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1"
+    "webpack-dev-server": "^5.2.2"
   },
   "private": true
 }
